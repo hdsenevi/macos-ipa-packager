@@ -715,7 +715,7 @@
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EHS-JB-jxn">
                                         <rect key="frame" x="18" y="495" width="90" height="14"/>
                                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Project Location" id="QwE-UT-PCV">
-                                            <font key="font" metaFont="message" size="11"/>
+                                            <font key="font" metaFont="controlContent" size="11"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
@@ -723,23 +723,23 @@
                                     <pathControl toolTip="The root folder that contains your iOS project. It should have an .xcodeproj file inside " verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bgB-jS-627" userLabel="Project Location">
                                         <rect key="frame" x="17" y="462" width="143" height="22"/>
                                         <pathCell key="cell" controlSize="small" selectable="YES" editable="YES" alignment="left" pathStyle="popUp" id="dPn-bP-5zz">
-                                            <font key="font" metaFont="message" size="11"/>
-                                            <url key="url" string="file:///Users/warrenburton/Desktop/SuperDuperApp"/>
+                                            <font key="font" metaFont="controlContent" size="11"/>
+                                            <url key="url" string="file:///Users/p782780/Downloads/SuperDuperApp/"/>
                                         </pathCell>
                                     </pathControl>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Exj-GI-LQB">
                                         <rect key="frame" x="18" y="440" width="90" height="14"/>
                                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Build Repository" id="0Jl-5o-6TB">
-                                            <font key="font" metaFont="message" size="11"/>
+                                            <font key="font" metaFont="controlContent" size="11"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
                                     </textField>
                                     <pathControl toolTip="The destination folder that you want your .ipa file to be built into" verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L45-91-Vtx" userLabel="Build Repository">
-                                        <rect key="frame" x="17" y="407" width="103" height="22"/>
+                                        <rect key="frame" x="17" y="407" width="117" height="22"/>
                                         <pathCell key="cell" controlSize="small" selectable="YES" editable="YES" alignment="left" pathStyle="popUp" id="Gk8-3w-iAG">
-                                            <font key="font" metaFont="message" size="11"/>
-                                            <url key="url" string="file:///Users/warrenburton/Desktop/"/>
+                                            <font key="font" metaFont="controlContent" size="11"/>
+                                            <url key="url" string="file:///Users/p782780/Downloads/"/>
                                         </pathCell>
                                     </pathControl>
                                     <textField toolTip="The name of your target to be built. " verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IQw-GZ-GgB" userLabel="Target Name Field">
@@ -854,6 +854,7 @@
                         <outlet property="projectPath" destination="bgB-jS-627" id="Y9J-ZJ-4CO"/>
                         <outlet property="repoPath" destination="L45-91-Vtx" id="RXs-dy-JPA"/>
                         <outlet property="spinner" destination="41Z-lU-6tC" id="KqD-BL-K2p"/>
+                        <outlet property="stopButton" destination="kll-Lc-N1d" id="P6k-1i-Pim"/>
                         <outlet property="targetName" destination="IQw-GZ-GgB" id="3xM-h8-tDg"/>
                     </connections>
                 </viewController>
