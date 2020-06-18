@@ -1,7 +1,8 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="11134" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.Cocoa.Storyboard.XIB" version="3.0" toolsVersion="15705" targetRuntime="MacOSX.Cocoa" propertyAccessControl="none" useAutolayout="YES" initialViewController="B8D-0N-5wS">
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="11134"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.CocoaPlugin" version="15705"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Application-->
@@ -673,7 +674,7 @@
                         <outlet property="delegate" destination="Voe-Tx-rLC" id="PrD-fu-P6m"/>
                     </connections>
                 </application>
-                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModuleProvider="target"/>
+                <customObject id="Voe-Tx-rLC" customClass="AppDelegate" customModule="ipa_packager" customModuleProvider="target"/>
                 <customObject id="YLy-65-1bz" customClass="NSFontManager"/>
                 <customObject id="Ady-hI-5gd" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
@@ -693,25 +694,172 @@
                         </connections>
                     </window>
                     <connections>
-                        <segue destination="XfG-lQ-9wD" kind="relationship" relationship="window.shadowedContentViewController" id="cq2-FE-JQM"/>
+                        <segue destination="Cnc-Bt-Tvf" kind="relationship" relationship="window.shadowedContentViewController" id="EP0-GX-3he"/>
                     </connections>
                 </windowController>
                 <customObject id="Oky-zY-oP4" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="75" y="250"/>
         </scene>
-        <!--View Controller-->
-        <scene sceneID="hIz-AP-VOD">
+        <!--Tasks View Controller-->
+        <scene sceneID="KCK-00-xU8">
             <objects>
-                <viewController id="XfG-lQ-9wD" customClass="ViewController" customModuleProvider="target" sceneMemberID="viewController">
-                    <view key="view" id="m2S-Jp-Qdl">
-                        <rect key="frame" x="0.0" y="0.0" width="480" height="270"/>
-                        <autoresizingMask key="autoresizingMask"/>
+                <viewController id="Cnc-Bt-Tvf" customClass="TasksViewController" customModule="TasksProject" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" id="ho9-ac-nVC">
+                        <rect key="frame" x="0.0" y="0.0" width="513" height="529"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="12" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QNA-wo-ceu">
+                                <rect key="frame" x="0.0" y="0.0" width="513" height="529"/>
+                                <subviews>
+                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EHS-JB-jxn">
+                                        <rect key="frame" x="18" y="495" width="90" height="14"/>
+                                        <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Project Location" id="QwE-UT-PCV">
+                                            <font key="font" metaFont="message" size="11"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <pathControl toolTip="The root folder that contains your iOS project. It should have an .xcodeproj file inside " verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bgB-jS-627" userLabel="Project Location">
+                                        <rect key="frame" x="17" y="462" width="143" height="22"/>
+                                        <pathCell key="cell" controlSize="small" selectable="YES" editable="YES" alignment="left" pathStyle="popUp" id="dPn-bP-5zz">
+                                            <font key="font" metaFont="message" size="11"/>
+                                            <url key="url" string="file:///Users/warrenburton/Desktop/SuperDuperApp"/>
+                                        </pathCell>
+                                    </pathControl>
+                                    <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Exj-GI-LQB">
+                                        <rect key="frame" x="18" y="440" width="90" height="14"/>
+                                        <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Build Repository" id="0Jl-5o-6TB">
+                                            <font key="font" metaFont="message" size="11"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <pathControl toolTip="The destination folder that you want your .ipa file to be built into" verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L45-91-Vtx" userLabel="Build Repository">
+                                        <rect key="frame" x="17" y="407" width="103" height="22"/>
+                                        <pathCell key="cell" controlSize="small" selectable="YES" editable="YES" alignment="left" pathStyle="popUp" id="Gk8-3w-iAG">
+                                            <font key="font" metaFont="message" size="11"/>
+                                            <url key="url" string="file:///Users/warrenburton/Desktop/"/>
+                                        </pathCell>
+                                    </pathControl>
+                                    <textField toolTip="The name of your target to be built. " verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IQw-GZ-GgB" userLabel="Target Name Field">
+                                        <rect key="frame" x="20" y="378" width="473" height="21"/>
+                                        <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Target Name" drawsBackground="YES" id="iZZ-YI-IUj">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Min-B3-GfI" userLabel="Task Output Area">
+                                        <rect key="frame" x="20" y="82" width="473" height="284"/>
+                                        <clipView key="contentView" drawsBackground="NO" id="FrP-Eh-UjA">
+                                            <rect key="frame" x="1" y="1" width="471" height="282"/>
+                                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                            <subviews>
+                                                <textView editable="NO" importsGraphics="NO" verticallyResizable="YES" findStyle="panel" continuousSpellChecking="YES" allowsNonContiguousLayout="YES" spellingCorrection="YES" smartInsertDelete="YES" id="DyT-xo-Ixl">
+                                                    <rect key="frame" x="0.0" y="0.0" width="471" height="282"/>
+                                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                                    <color key="textColor" name="textColor" catalog="System" colorSpace="catalog"/>
+                                                    <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                                    <size key="minSize" width="471" height="282"/>
+                                                    <size key="maxSize" width="473" height="10000000"/>
+                                                    <color key="insertionPointColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                                </textView>
+                                            </subviews>
+                                        </clipView>
+                                        <scroller key="horizontalScroller" hidden="YES" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="YES" id="DZr-lu-M7j">
+                                            <rect key="frame" x="-100" y="-100" width="87" height="18"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </scroller>
+                                        <scroller key="verticalScroller" wantsLayer="YES" verticalHuggingPriority="750" doubleValue="1" horizontal="NO" id="2VP-9S-MrL">
+                                            <rect key="frame" x="456" y="1" width="16" height="282"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                        </scroller>
+                                    </scrollView>
+                                    <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OhV-Vy-wSs">
+                                        <rect key="frame" x="20" y="20" width="473" height="50"/>
+                                        <subviews>
+                                            <customView translatesAutoresizingMaskIntoConstraints="NO" id="qh4-Fg-S7D">
+                                                <rect key="frame" x="0.0" y="0.0" width="317" height="50"/>
+                                            </customView>
+                                            <button toolTip="Start building the project" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="bPP-2f-ULl" userLabel="Build Button">
+                                                <rect key="frame" x="319" y="8" width="71" height="32"/>
+                                                <buttonCell key="cell" type="push" title="Build" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="2N4-Po-fO2">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="startTask:" target="Cnc-Bt-Tvf" id="0bX-wa-02i"/>
+                                                </connections>
+                                            </button>
+                                            <button toolTip="Stop building the project" verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="kll-Lc-N1d" userLabel="Stop Button">
+                                                <rect key="frame" x="386" y="8" width="69" height="32"/>
+                                                <buttonCell key="cell" type="push" title="Stop" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="tSo-ZT-xXq">
+                                                    <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                                    <font key="font" metaFont="system"/>
+                                                </buttonCell>
+                                                <connections>
+                                                    <action selector="stopTask:" target="Cnc-Bt-Tvf" id="PGs-oW-H1K"/>
+                                                </connections>
+                                            </button>
+                                            <progressIndicator wantsLayer="YES" horizontalHuggingPriority="750" verticalHuggingPriority="750" maxValue="100" displayedWhenStopped="NO" bezeled="NO" indeterminate="YES" controlSize="small" style="spinning" translatesAutoresizingMaskIntoConstraints="NO" id="41Z-lU-6tC">
+                                                <rect key="frame" x="457" y="17" width="16" height="16"/>
+                                            </progressIndicator>
+                                        </subviews>
+                                        <visibilityPriorities>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                            <integer value="1000"/>
+                                        </visibilityPriorities>
+                                        <customSpacing>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                            <real value="3.4028234663852886e+38"/>
+                                        </customSpacing>
+                                    </stackView>
+                                </subviews>
+                                <edgeInsets key="edgeInsets" left="20" right="20" top="20" bottom="20"/>
+                                <visibilityPriorities>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                    <integer value="1000"/>
+                                </visibilityPriorities>
+                                <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                    <real value="3.4028234663852886e+38"/>
+                                </customSpacing>
+                            </stackView>
+                        </subviews>
+                        <constraints>
+                            <constraint firstItem="QNA-wo-ceu" firstAttribute="leading" secondItem="ho9-ac-nVC" secondAttribute="leading" id="5uk-O0-MUZ"/>
+                            <constraint firstAttribute="bottom" secondItem="QNA-wo-ceu" secondAttribute="bottom" id="BcJ-O7-6bo"/>
+                            <constraint firstAttribute="trailing" secondItem="QNA-wo-ceu" secondAttribute="trailing" id="p5f-DV-l3P"/>
+                            <constraint firstItem="QNA-wo-ceu" firstAttribute="top" secondItem="ho9-ac-nVC" secondAttribute="top" id="t2e-MK-rql"/>
+                        </constraints>
                     </view>
+                    <connections>
+                        <outlet property="buildButton" destination="bPP-2f-ULl" id="eVZ-id-FKE"/>
+                        <outlet property="outputText" destination="DyT-xo-Ixl" id="CHU-o9-tde"/>
+                        <outlet property="projectPath" destination="bgB-jS-627" id="Y9J-ZJ-4CO"/>
+                        <outlet property="repoPath" destination="L45-91-Vtx" id="RXs-dy-JPA"/>
+                        <outlet property="spinner" destination="41Z-lU-6tC" id="KqD-BL-K2p"/>
+                        <outlet property="targetName" destination="IQw-GZ-GgB" id="3xM-h8-tDg"/>
+                    </connections>
                 </viewController>
-                <customObject id="rPt-NT-nkU" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
+                <customObject id="fPL-eP-she" userLabel="First Responder" customClass="NSResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="75" y="655"/>
+            <point key="canvasLocation" x="76" y="798"/>
         </scene>
     </scenes>
 </document>
