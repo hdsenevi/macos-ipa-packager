@@ -17,9 +17,8 @@ class TasksViewController: NSViewController {
     @IBOutlet var repoPath:NSPathControl!
     @IBOutlet var buildButton:NSButton!
     @IBOutlet var targetName:NSTextField!
-    @IBOutlet weak var stopButton: NSButton!
     
-    dynamic var isRunning = false
+    @objc dynamic var isRunning = false
     var outputPipe:Pipe!
     var buildTask:Process!
     
@@ -47,15 +46,15 @@ class TasksViewController: NSViewController {
         arguments.append(finalLocation)
         
         buildButton.isEnabled = false
-        stopButton.isEnabled = true
         spinner.startAnimation(self)
+        
+        runScript(arguments)
       }
     }
     
     @IBAction func stopTask(_ sender:AnyObject) {
       
         buildButton.isEnabled = true
-        stopButton.isEnabled = false
         spinner.stopAnimation(self)
     }
     
@@ -64,7 +63,36 @@ class TasksViewController: NSViewController {
         // Do view setup here.
         
         buildButton.isEnabled = true
-        stopButton.isEnabled = false
+        spinner.stopAnimation(self)
     }
     
+    func runScript(_ arguments:[String]) {
+        // Sets isRunning to true. This enables the Stop button, since it’s bound to the TasksViewController‘s isRunning property via Cocoa Bindings.
+        // You want this to happen on the main thread.
+        isRunning = true
+        
+        // Creates a DispatchQueue to run the heavy lifting on a background thread
+        let taskQueue = DispatchQueue.global(qos: DispatchQoS.QoSClass.background)
+        
+        // Uses async on the DispatchQueue The application will continue to process things like button clicks on the main thread,
+        // but the NSTask will run on the background thread until it is complete.
+        taskQueue.async {
+            
+            //TESTING CODE
+            
+            // This is a temporary line of code that causes the current thread to sleep for 2 seconds, simulating a long-running task.
+            Thread.sleep(forTimeInterval: 2.0)
+            
+            // manipulating UI elements in main queue
+            DispatchQueue.main.async(execute: {
+                self.buildButton.isEnabled = true
+                self.spinner.stopAnimation(self)
+                self.isRunning = false
+            })
+            
+        //TESTING CODE
+      }
+      
+    }
+
 }
