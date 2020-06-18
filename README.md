@@ -1,2 +1,4 @@
-# macos-ipa-packager
-mac os app that builds and packages a .ipa file
+# IPA Packager
+macOS app that builds and packages an .ipa file
+
+![ipa packager art work](./docs/artwork.png)
