@@ -9,7 +9,7 @@
 import Cocoa
 
 class TasksViewController: NSViewController {
-
+    
     //Controller Outlets
     @IBOutlet var outputText:NSTextView!
     @IBOutlet var spinner:NSProgressIndicator!
@@ -23,37 +23,37 @@ class TasksViewController: NSViewController {
     var buildTask:Process!
     
     @IBAction func startTask(_ sender:AnyObject) {
-      outputText.string = ""
-
-      if let projectURL = projectPath.url, let repositoryURL = repoPath.url {
-        let projectLocation = projectURL.path
-        let finalLocation = repositoryURL.path
+        outputText.string = ""
         
-        // By convention, the name of the folder and the name of the project file are the same.
-        // Getting the lastPathComponent property of the project folder contained in projectURL and adding an “.xcodeproj” extension gets the path to the project file.
-        let projectName = projectURL.lastPathComponent
-        let xcodeProjectFile = projectLocation + "/\(projectName).xcodeproj"
-        
-        // Defines the subdirectory where your task will store intermediate build files while it’s creating the ipa file as build.
-        let buildLocation = projectLocation + "/build"
-        
-        // These arguments will be provided to NATask to be used
-        var arguments:[String] = []
-        arguments.append(xcodeProjectFile)
-        arguments.append(targetName.stringValue)
-        arguments.append(buildLocation)
-        arguments.append(projectName)
-        arguments.append(finalLocation)
-        
-        buildButton.isEnabled = false
-        spinner.startAnimation(self)
-        
-        runScript(arguments)
-      }
+        if let projectURL = projectPath.url, let repositoryURL = repoPath.url {
+            let projectLocation = projectURL.path
+            let finalLocation = repositoryURL.path
+            
+            // By convention, the name of the folder and the name of the project file are the same.
+            // Getting the lastPathComponent property of the project folder contained in projectURL and adding an “.xcodeproj” extension gets the path to the project file.
+            let projectName = projectURL.lastPathComponent
+            let xcodeProjectFile = projectLocation + "/\(projectName).xcodeproj"
+            
+            // Defines the subdirectory where your task will store intermediate build files while it’s creating the ipa file as build.
+            let buildLocation = projectLocation + "/build"
+            
+            // These arguments will be provided to NATask to be used
+            var arguments:[String] = []
+            arguments.append(xcodeProjectFile)
+            arguments.append(targetName.stringValue)
+            arguments.append(buildLocation)
+            arguments.append(projectName)
+            arguments.append(finalLocation)
+            
+            buildButton.isEnabled = false
+            spinner.startAnimation(self)
+            
+            runScript(arguments)
+        }
     }
     
     @IBAction func stopTask(_ sender:AnyObject) {
-      
+        
         buildButton.isEnabled = true
         spinner.stopAnimation(self)
     }
@@ -78,7 +78,39 @@ class TasksViewController: NSViewController {
         // but the NSTask will run on the background thread until it is complete.
         taskQueue.async {
             
-            //TESTING CODE
+            // Gets the path to a script named BuildScript.command, included in your application’s bundle. This is a custom script
+            guard let path = Bundle.main.path(forResource: "BuildScript", ofType:"command") else {
+                print("Unable to locate BuildScript.command")
+                return
+            }
+            
+            // Creates a new Process object and assigns it to the TasksViewController‘s buildTask property.
+            // The launchPath property is the path to the executable you want to run. Assigns the BuildScript.command‘s path to the Process‘s launchPath, then assigns the arguments that were passed to runScript:to Process‘s arguments property.
+            // Process will pass the arguments to the executable, as though you had typed them into terminal.
+            self.buildTask = Process()
+            self.buildTask.launchPath = path
+            self.buildTask.arguments = arguments
+            
+            // Process has a terminationHandler property that contains a block which is executed when the task is finished.
+            // This updates the UI to reflect that finished status as you did before.
+            self.buildTask.terminationHandler = {
+                task in
+                DispatchQueue.main.async(execute: {
+                    self.buildButton.isEnabled = true
+                    self.spinner.stopAnimation(self)
+                    self.isRunning = false
+                })
+            }
+            
+            //TODO - Output Handling
+            
+            // In order to run the task and execute the script, calls launch on the Process object. There are also methods to terminate, interrupt, suspend or resume an Process.
+            self.buildTask.launch()
+            
+            // This tells the Process object to block any further activity on the current thread until the task is complete.
+            // Remember, this code is running on a background thread. Your UI, which is running on the main thread, will still respond to user input.
+            self.buildTask.waitUntilExit()
+            
             
             // This is a temporary line of code that causes the current thread to sleep for 2 seconds, simulating a long-running task.
             Thread.sleep(forTimeInterval: 2.0)
@@ -90,9 +122,9 @@ class TasksViewController: NSViewController {
                 self.isRunning = false
             })
             
-        //TESTING CODE
-      }
-      
+            //TESTING CODE
+        }
+        
     }
-
+    
 }
