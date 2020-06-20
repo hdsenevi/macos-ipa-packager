@@ -40,7 +40,7 @@ class TasksViewController: NSViewController {
             // These arguments will be provided to NATask to be used
             var arguments:[String] = []
             arguments.append(xcodeProjectFile)
-            arguments.append(targetName.stringValue)
+            arguments.append(targetName.stringValue.isEmpty ? "SuperDuperApp" : targetName.stringValue)
             arguments.append(buildLocation)
             arguments.append(projectName)
             arguments.append(finalLocation)

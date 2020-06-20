@@ -11,6 +11,7 @@
 		8B2775B9249B0D6100DBA680 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8B2775B8249B0D6100DBA680 /* Assets.xcassets */; };
 		8B2775BC249B0D6100DBA680 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8B2775BA249B0D6100DBA680 /* Main.storyboard */; };
 		8B2775C5249B0E9200DBA680 /* TasksViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8B2775C4249B0E9200DBA680 /* TasksViewController.swift */; };
+		8BA2C179249D84EA001FA0EE /* BuildScript.command in Resources */ = {isa = PBXBuildFile; fileRef = 8BA2C178249D84EA001FA0EE /* BuildScript.command */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -21,6 +22,7 @@
 		8B2775BD249B0D6100DBA680 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8B2775BE249B0D6100DBA680 /* ipa_packager.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = ipa_packager.entitlements; sourceTree = "<group>"; };
 		8B2775C4249B0E9200DBA680 /* TasksViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TasksViewController.swift; sourceTree = "<group>"; };
+		8BA2C178249D84EA001FA0EE /* BuildScript.command */ = {isa = PBXFileReference; lastKnownFileType = text.script.sh; path = BuildScript.command; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -55,6 +57,7 @@
 			children = (
 				8B2775B4249B0D5F00DBA680 /* AppDelegate.swift */,
 				8B2775C4249B0E9200DBA680 /* TasksViewController.swift */,
+				8BA2C178249D84EA001FA0EE /* BuildScript.command */,
 				8B2775B8249B0D6100DBA680 /* Assets.xcassets */,
 				8B2775BA249B0D6100DBA680 /* Main.storyboard */,
 				8B2775BD249B0D6100DBA680 /* Info.plist */,
@@ -123,6 +126,7 @@
 			files = (
 				8B2775B9249B0D6100DBA680 /* Assets.xcassets in Resources */,
 				8B2775BC249B0D6100DBA680 /* Main.storyboard in Resources */,
+				8BA2C179249D84EA001FA0EE /* BuildScript.command in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -270,6 +274,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "ipa-packager/ipa_packager.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 5MSSM7WCB9;
@@ -281,6 +286,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "info.shanaka.ipa-packager";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Debug;
@@ -290,6 +296,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_ENTITLEMENTS = "ipa-packager/ipa_packager.entitlements";
+				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
 				DEVELOPMENT_TEAM = 5MSSM7WCB9;
@@ -301,6 +308,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "info.shanaka.ipa-packager";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE_SPECIFIER = "";
 				SWIFT_VERSION = 5.0;
 			};
 			name = Release;
