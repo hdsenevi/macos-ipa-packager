@@ -127,4 +127,15 @@ class TasksViewController: NSViewController {
         
     }
     
+    @IBAction func testAction(_ sender: Any) {
+        let path = "/usr/bin/say"
+        let arguments = ["hello world"]
+               
+        let task = Process() //NSTask.launchedTaskWithLaunchPath(path, arguments: arguments)
+        task.launchPath = path
+        task.arguments = arguments
+        task.launch()
+        task.waitUntilExit()
+    }
+    
 }

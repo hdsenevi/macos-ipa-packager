@@ -704,16 +704,16 @@
         <!--Tasks View Controller-->
         <scene sceneID="KCK-00-xU8">
             <objects>
-                <viewController id="Cnc-Bt-Tvf" customClass="TasksViewController" customModule="TasksProject" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="Cnc-Bt-Tvf" customClass="TasksViewController" customModule="ipa_packager" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" id="ho9-ac-nVC">
-                        <rect key="frame" x="0.0" y="0.0" width="513" height="529"/>
+                        <rect key="frame" x="0.0" y="0.0" width="513" height="562"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <stackView distribution="fill" orientation="vertical" alignment="leading" spacing="12" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="QNA-wo-ceu">
-                                <rect key="frame" x="0.0" y="0.0" width="513" height="529"/>
+                                <rect key="frame" x="0.0" y="0.0" width="513" height="562"/>
                                 <subviews>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="EHS-JB-jxn">
-                                        <rect key="frame" x="18" y="495" width="90" height="14"/>
+                                        <rect key="frame" x="18" y="528" width="90" height="14"/>
                                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Project Location" id="QwE-UT-PCV">
                                             <font key="font" metaFont="message" size="11"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -721,14 +721,14 @@
                                         </textFieldCell>
                                     </textField>
                                     <pathControl toolTip="The root folder that contains your iOS project. It should have an .xcodeproj file inside " verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="bgB-jS-627" userLabel="Project Location">
-                                        <rect key="frame" x="17" y="462" width="143" height="22"/>
+                                        <rect key="frame" x="17" y="495" width="143" height="22"/>
                                         <pathCell key="cell" controlSize="small" selectable="YES" editable="YES" alignment="left" pathStyle="popUp" id="dPn-bP-5zz">
                                             <font key="font" metaFont="message" size="11"/>
                                             <url key="url" string="file:///Users/p782780/Downloads/SuperDuperApp/"/>
                                         </pathCell>
                                     </pathControl>
                                     <textField verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="Exj-GI-LQB">
-                                        <rect key="frame" x="18" y="440" width="90" height="14"/>
+                                        <rect key="frame" x="18" y="473" width="90" height="14"/>
                                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Build Repository" id="0Jl-5o-6TB">
                                             <font key="font" metaFont="message" size="11"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -736,14 +736,14 @@
                                         </textFieldCell>
                                     </textField>
                                     <pathControl toolTip="The destination folder that you want your .ipa file to be built into" verticalHuggingPriority="750" allowsExpansionToolTips="YES" translatesAutoresizingMaskIntoConstraints="NO" id="L45-91-Vtx" userLabel="Build Repository">
-                                        <rect key="frame" x="17" y="407" width="117" height="22"/>
+                                        <rect key="frame" x="17" y="440" width="117" height="22"/>
                                         <pathCell key="cell" controlSize="small" selectable="YES" editable="YES" alignment="left" pathStyle="popUp" id="Gk8-3w-iAG">
                                             <font key="font" metaFont="message" size="11"/>
                                             <url key="url" string="file:///Users/p782780/Downloads/"/>
                                         </pathCell>
                                     </pathControl>
                                     <textField toolTip="The name of your target to be built. " verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="IQw-GZ-GgB" userLabel="Target Name Field">
-                                        <rect key="frame" x="20" y="378" width="473" height="21"/>
+                                        <rect key="frame" x="20" y="411" width="473" height="21"/>
                                         <textFieldCell key="cell" scrollable="YES" lineBreakMode="clipping" selectable="YES" editable="YES" sendsActionOnEndEditing="YES" state="on" borderStyle="bezel" placeholderString="Target Name" drawsBackground="YES" id="iZZ-YI-IUj">
                                             <font key="font" metaFont="system"/>
                                             <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
@@ -751,7 +751,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <scrollView horizontalLineScroll="10" horizontalPageScroll="10" verticalLineScroll="10" verticalPageScroll="10" hasHorizontalScroller="NO" usesPredominantAxisScrolling="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Min-B3-GfI" userLabel="Task Output Area">
-                                        <rect key="frame" x="20" y="82" width="473" height="284"/>
+                                        <rect key="frame" x="20" y="115" width="473" height="284"/>
                                         <clipView key="contentView" drawsBackground="NO" id="FrP-Eh-UjA">
                                             <rect key="frame" x="1" y="1" width="471" height="282"/>
                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -777,7 +777,7 @@
                                         </scroller>
                                     </scrollView>
                                     <stackView distribution="fill" orientation="horizontal" alignment="centerY" horizontalStackHuggingPriority="249.99998474121094" verticalStackHuggingPriority="249.99998474121094" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="OhV-Vy-wSs">
-                                        <rect key="frame" x="20" y="20" width="473" height="50"/>
+                                        <rect key="frame" x="20" y="53" width="473" height="50"/>
                                         <subviews>
                                             <customView translatesAutoresizingMaskIntoConstraints="NO" id="qh4-Fg-S7D">
                                                 <rect key="frame" x="0.0" y="0.0" width="317" height="50"/>
@@ -820,6 +820,16 @@
                                             <real value="3.4028234663852886e+38"/>
                                         </customSpacing>
                                     </stackView>
+                                    <button verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="A4i-bn-5h9">
+                                        <rect key="frame" x="14" y="13" width="104" height="32"/>
+                                        <buttonCell key="cell" type="push" title="Test script" bezelStyle="rounded" alignment="center" borderStyle="border" imageScaling="proportionallyDown" inset="2" id="6pW-N6-3LY">
+                                            <behavior key="behavior" pushIn="YES" lightByBackground="YES" lightByGray="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="testAction:" target="Cnc-Bt-Tvf" id="Pmh-ew-wc3"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
                                 <edgeInsets key="edgeInsets" left="20" right="20" top="20" bottom="20"/>
                                 <visibilityPriorities>
@@ -830,8 +840,10 @@
                                     <integer value="1000"/>
                                     <integer value="1000"/>
                                     <integer value="1000"/>
+                                    <integer value="1000"/>
                                 </visibilityPriorities>
                                 <customSpacing>
+                                    <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
                                     <real value="3.4028234663852886e+38"/>
