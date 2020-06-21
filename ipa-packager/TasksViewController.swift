@@ -22,42 +22,7 @@ class TasksViewController: NSViewController {
     var outputPipe:Pipe!
     var buildTask:Process!
     
-    @IBAction func startTask(_ sender:AnyObject) {
-        outputText.string = ""
-        
-        if let projectURL = projectPath.url, let repositoryURL = repoPath.url {
-            let projectLocation = projectURL.path
-            let finalLocation = repositoryURL.path
-            
-            // By convention, the name of the folder and the name of the project file are the same.
-            // Getting the lastPathComponent property of the project folder contained in projectURL and adding an “.xcodeproj” extension gets the path to the project file.
-            let projectName = projectURL.lastPathComponent
-            let xcodeProjectFile = projectLocation + "/\(projectName).xcodeproj"
-            
-            // Defines the subdirectory where your task will store intermediate build files while it’s creating the ipa file as build.
-            let buildLocation = projectLocation + "/build"
-            
-            // These arguments will be provided to NATask to be used
-            var arguments:[String] = []
-            arguments.append(xcodeProjectFile)
-            arguments.append(targetName.stringValue.isEmpty ? "SuperDuperApp" : targetName.stringValue)
-            arguments.append(buildLocation)
-            arguments.append(projectName)
-            arguments.append(finalLocation)
-            
-            buildButton.isEnabled = false
-            spinner.startAnimation(self)
-            
-            runScript(arguments)
-        }
-    }
-    
-    @IBAction func stopTask(_ sender:AnyObject) {
-        
-        buildButton.isEnabled = true
-        spinner.stopAnimation(self)
-    }
-    
+    // MARK: - Lifecycle methods
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do view setup here.
@@ -66,6 +31,7 @@ class TasksViewController: NSViewController {
         spinner.stopAnimation(self)
     }
     
+    // MARK: - Custom methods
     func runScript(_ arguments:[String]) {
         // Sets isRunning to true. This enables the Stop button, since it’s bound to the TasksViewController‘s isRunning property via Cocoa Bindings.
         // You want this to happen on the main thread.
@@ -102,7 +68,8 @@ class TasksViewController: NSViewController {
                 })
             }
             
-            //TODO - Output Handling
+            // Output Handling
+            self.captureStandardOutputAndRouteToTextView(self.buildTask)
             
             // In order to run the task and execute the script, calls launch on the Process object. There are also methods to terminate, interrupt, suspend or resume an Process.
             self.buildTask.launch()
@@ -127,6 +94,83 @@ class TasksViewController: NSViewController {
         
     }
     
+    func captureStandardOutputAndRouteToTextView(_ task:Process) {
+        
+        // Creates an Pipe and attaches it to buildTask‘s standard output.
+        // Pipe is a class representing the same kind of pipe that you would normally create in Terminal.
+        // Anything that is written to buildTask‘s stdout will be provided to this Pipe object.
+        outputPipe = Pipe()
+        task.standardOutput = outputPipe
+        
+        // Pipe has two properties: fileHandleForReading and fileHandleForWriting.
+        // These are NSFileHandle objects. FileHandleForReading is used to read the data in the pipe.
+        // You call waitForDataInBackgroundAndNotify on it to use a separate background thread to check for available data.
+        outputPipe.fileHandleForReading.waitForDataInBackgroundAndNotify()
+        
+        // Whenever data is available, waitForDataInBackgroundAndNotify notifies you by calling the block of code you register with
+        // NSNotificationCenter to handle NSFileHandleDataAvailableNotification
+        NotificationCenter.default.addObserver(forName: NSNotification.Name.NSFileHandleDataAvailable, object: outputPipe.fileHandleForReading , queue: nil) {
+            notification in
+            
+            // Inside your notification handler, gets the data as an NSData object and converts it to a string
+            let output = self.outputPipe.fileHandleForReading.availableData
+            let outputString = String(data: output, encoding: String.Encoding.utf8) ?? ""
+            
+            // On the main thread, appends the string from the previous step to the end of the text in outputText and scrolls the text area
+            // so that the user can see the latest output as it arrives. This must be on the main thread, like all UI and user interaction.
+            DispatchQueue.main.async(execute: {
+                let previousOutput = self.outputText.string
+                let nextOutput = previousOutput + "\n" + outputString
+                self.outputText.string = nextOutput
+                
+                let range = NSRange(location:nextOutput.count,length:0)
+                self.outputText.scrollRangeToVisible(range)
+                
+            })
+            
+            // Finally, repeats the call to wait for data in the background.
+            // This creates a loop that will continually wait for available data, process that data, wait for available data, and so on.
+            self.outputPipe.fileHandleForReading.waitForDataInBackgroundAndNotify()
+        }
+    }
+    
+    // MARK: - IBActions
+    @IBAction func startTask(_ sender:AnyObject) {
+        outputText.string = ""
+        
+        if let projectURL = projectPath.url, let repositoryURL = repoPath.url {
+            let projectLocation = projectURL.path
+            let finalLocation = repositoryURL.path
+            
+            // By convention, the name of the folder and the name of the project file are the same.
+            // Getting the lastPathComponent property of the project folder contained in projectURL and adding an “.xcodeproj” extension gets the path to the project file.
+            let projectName = projectURL.lastPathComponent
+            let xcodeProjectFile = projectLocation + "/\(projectName).xcodeproj"
+            
+            // Defines the subdirectory where your task will store intermediate build files while it’s creating the ipa file as build.
+            let buildLocation = projectLocation + "/build"
+            
+            // These arguments will be provided to NATask to be used
+            var arguments:[String] = []
+            arguments.append(xcodeProjectFile)
+            arguments.append(targetName.stringValue.isEmpty ? "SuperDuperApp" : targetName.stringValue)
+            arguments.append(buildLocation)
+            arguments.append(projectName)
+            arguments.append(finalLocation)
+            
+            buildButton.isEnabled = false
+            spinner.startAnimation(self)
+            
+            runScript(arguments)
+        }
+    }
+    
+    @IBAction func stopTask(_ sender:AnyObject) {
+        
+        buildButton.isEnabled = true
+        spinner.stopAnimation(self)
+    }
+    
     @IBAction func testAction(_ sender: Any) {
         let path = "/usr/bin/say"
         let arguments = ["hello world"]
@@ -137,5 +181,4 @@ class TasksViewController: NSViewController {
         task.launch()
         task.waitUntilExit()
     }
-    
 }
