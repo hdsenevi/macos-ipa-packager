@@ -166,9 +166,11 @@ class TasksViewController: NSViewController {
     }
     
     @IBAction func stopTask(_ sender:AnyObject) {
-        
-        buildButton.isEnabled = true
-        spinner.stopAnimation(self)
+        if isRunning {
+            buildTask.terminate()
+            buildButton.isEnabled = true
+            spinner.stopAnimation(self)
+        }
     }
     
     @IBAction func testAction(_ sender: Any) {
